@@ -62,3 +62,12 @@ If CLI dependency resolution fails, use:
 ```bash
 npx vercel@50.14.1 --prod
 ```
+
+
+## What to do now (with your NVIDIA key)
+1. Put your key in `.env.local` as `NVIDIA_NIM_API_KEY=...`.
+2. Run `npm run dev` and submit a request from `/`.
+3. Click **Analyze**; response includes `provider: nvidia-nim` when live, or `local-rules` fallback if unavailable.
+4. In Vercel, add env vars in Project Settings > Environment Variables, then redeploy.
+
+> Security: never commit real API keys to git; keep keys only in local env or Vercel secrets.
