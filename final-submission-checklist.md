@@ -4,8 +4,6 @@
 - [x] .env.example
 - [x] architecture.md
 - [x] submission-description.md
-- [x] demo-script.md
-- [x] video-outline.md
 - [x] business-impact.md
-- [x] seeded demo data
+- [x] seeded demo data (Persistent)
 - [x] local run instructions
