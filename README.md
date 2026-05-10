@@ -1,28 +1,73 @@
 # OpsFlow AI
 
-OpsFlow AI is an intelligent internal operations request-routing and approval platform built for Internal Tools Hacks. It uses **NVIDIA NIM (LLaMA 3.3 70B)** to automatically classify, route, and prioritize internal requests.
+OpsFlow AI is an internal operations request-routing and approval tool that classifies requests, flags missing information, routes to the right approver, and tracks workflow status with transparent ROI metrics.
 
-## Live Demo
-[https://opsflow-ai-hazel.vercel.app](https://opsflow-ai-hazel.vercel.app)
+## Exact Repo Tree
+```text
+.
+├── app
+│   ├── api
+│   │   ├── analyze/route.ts
+│   │   ├── metrics/route.ts
+│   │   └── requests/route.ts
+│   ├── approvals/page.tsx
+│   ├── dashboard/page.tsx
+│   ├── requests/[id]/page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components
+│   ├── RequestForm.tsx
+│   └── StatusBadge.tsx
+├── data/demoData.ts
+├── lib
+│   ├── types.ts
+│   └── workflow.ts
+├── architecture.md
+├── business-impact.md
+├── demo-script.md
+├── final-submission-checklist.md
+├── submission-description.md
+├── video-outline.md
+├── .env.example
+├── package.json
+└── README.md
+```
 
-## The Problem
-Internal ops teams (IT, Finance, HR) are often overwhelmed by "triage overhead"—manual, repetitive tasks involving request classification and data gathering.
+## Features
+- Employee request submission form with AI analysis preview.
+- AI-assisted structured output: `type`, `urgency`, `missingFields`, `routeTeam`, `approver`, `summary`.
+- Seeded workflows: software access, purchase approval, travel request.
+- Workflow states: submitted, needs info, in review, approved, rejected.
+- Approver queue and request detail with comments/history.
+- Metrics dashboard with request volume, turnaround, bottleneck, and estimated monthly hours saved.
 
-## Our Solution
-OpsFlow AI acts as a smart gateway:
-- **Intelligent Triage:** Uses NVIDIA NIM to analyze free-text descriptions.
-- **Auto-Routing:** Deterministically routes requests to the correct team (e.g., Mia Brooks for IT, Noah Patel for Finance).
-- **Data Completeness:** Automatically identifies missing information (like vendor quotes) and dynamically asks the requester for it.
-- **ROI Tracking:** Provides a real-time dashboard tracking operational efficiency and hours saved.
+## Local Setup
+```bash
+npm install
+npm run dev
+```
+Open `http://localhost:3000`.
 
-## Architecture
-- **Frontend:** Next.js 15, Tailwind CSS.
-- **AI Core:** NVIDIA NIM inference (Llama 3.3 70B Instruct).
-- **Workflow:** Dynamic, JSON-based structured data extraction.
-- **Deployment:** Vercel.
+## Environment Variables
+Copy `.env.example` and provide:
+- `NEXT_PUBLIC_BASE_URL`
+- `NVIDIA_NIM_API_KEY`
 
-## Run Locally
-1. Clone the repo.
-2. `npm install`.
-3. Set your `NVIDIA_NIM_API_KEY` in `.env.local`.
-4. `npm run dev`.
+## Vercel Deploy
+```bash
+npx vercel --prod
+```
+If CLI dependency resolution fails, use:
+```bash
+npx vercel@50.14.1 --prod
+```
+
+
+## What to do now (with your NVIDIA key)
+1. Put your key in `.env.local` as `NVIDIA_NIM_API_KEY=...`.
+2. Run `npm run dev` and submit a request from `/`.
+3. Click **Analyze**; response includes `provider: nvidia-nim` when live, or `local-rules` fallback if unavailable.
+4. In Vercel, add env vars in Project Settings > Environment Variables, then redeploy.
+
+> Security: never commit real API keys to git; keep keys only in local env or Vercel secrets.
