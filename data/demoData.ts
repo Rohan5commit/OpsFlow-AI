@@ -1,4 +1,4 @@
-import { OpsRequest } from '@/lib/types';
+import { OpsRequest, RequestStatus } from '@/lib/types';
 
 export const seedRequests: OpsRequest[] = [
   ...Array.from({ length: 10 }).map((_, i) => ({
@@ -14,9 +14,9 @@ export const seedRequests: OpsRequest[] = [
     approver: ['Mia Brooks', 'Noah Patel', 'Ethan Rivera'][i % 3],
     routeTeam: ['IT Operations', 'Finance', 'People Ops'][i % 3],
     summary: 'Auto-seeded demo request.',
-    status: (['approved', 'in_review', 'submitted'] as const)[i % 3],
+    status: (['approved', 'in_review', 'submitted'] as const)[i % 3] as RequestStatus,
     createdAt: '2026-05-01',
     comments: [],
-    history: [{ status: 'submitted', at: '2026-05-01' }]
+    history: [{ status: (['approved', 'in_review', 'submitted'] as const)[i % 3] as RequestStatus, at: '2026-05-01' }]
   }))
 ];
